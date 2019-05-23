@@ -1,8 +1,0 @@
-EnDjinn v3.3
-
-Enumerating Graphics Hardware Results...
-Adapter: NVIDIA GeForce GTX 1080
-- Output: \\.\DISPLAY1
-Adapter: Microsoft Basic Render Driver
-
-Closing Djinn.

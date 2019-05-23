@@ -44,8 +44,8 @@ int2 MainWindow::GetWindowSize() const
 }
 
 void MainWindow::Init() {
-    std::wstring longName = L"Djinn Renderer v3.1";
-    std::wstring shortName = L"DjinnRenderer";
+    std::wstring longName = L"EnDjinn";
+    std::wstring shortName = L"EnDjinn";
     std::wstring className = shortName + L"WindowClass";
 
     WNDCLASS wc = {};

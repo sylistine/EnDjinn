@@ -1,29 +1,8 @@
-Djinn Renderer v3.2
+EnDjinn v3.3
 
 Enumerating Graphics Hardware Results...
 Adapter: NVIDIA GeForce GTX 1080
 - Output: \\.\DISPLAY1
 Adapter: Microsoft Basic Render Driver
-
-Djinn Exception caught --------------------------------
-
-D3D12 Debug Layer Messages: 0
-
-The application made a call that is invalid. Either the parameters of the call or the state of some object was incorrect.
-Enable the D3D debug layer in order to see details via debug messages.
-
-Stack Trace:
-d:\aaron\dev\src\djinn3\djinn\                      debug.h:86    Djn::Exception::GetStackTrace
-d:\aaron\dev\src\djinn3\djinn\                      debug.h:48    Djn::Exception::Exception
-d:\aaron\dev\src\djinn3\djinn\                      gfx.cpp:204   Djn::Gfx::ThrowIfFailed
-d:\aaron\dev\src\djinn3\djinn\                      gfx.cpp:165   Djn::Gfx::Init
-d:\aaron\dev\src\djinn3\djinn\                      app.cpp:43    Djn::App::App
-d:\aaron\dev\src\djinn3\djinn\                    djinn.cpp:22    WinMain
-f:\dd\vctools\crt\vcstartup\src\startup\     exe_common.inl:107   invoke_main
-f:\dd\vctools\crt\vcstartup\src\startup\     exe_common.inl:283   __scrt_common_main_seh
-f:\dd\vctools\crt\vcstartup\src\startup\     exe_common.inl:326   __scrt_common_main
-f:\dd\vctools\crt\vcstartup\src\startup\    exe_winmain.cpp:17    WinMainCRTStartup
-
--------------------------------------------------------
 
 Closing Djinn.

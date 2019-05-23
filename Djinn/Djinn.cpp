@@ -11,7 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR args,
 {
     // Pretty much just asserting there is no logger exception.
     try {
-        Log::WriteRaw("Djinn Renderer v3.2\n");
+        Log::WriteRaw("EnDjinn v3.3\n");
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return -1;

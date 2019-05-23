@@ -87,7 +87,7 @@ Gfx::Gfx()
         nullptr, D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&_device)));
 
     // Enumerate supported MSAA quality levels.
-    UINT sampleCount = 4;
+    UINT sampleCount = 1;
     D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS msFeatureData = {};
     msFeatureData.Format = _renderFormat;
     msFeatureData.SampleCount = sampleCount;
@@ -154,7 +154,7 @@ void Gfx::Init(HWND hWnd, UINT width, UINT height)
     swapChainFullscreenDesc.Scaling;
     swapChainFullscreenDesc.Windowed;*/
     ThrowIfFailed(_factory->CreateSwapChainForHwnd(
-        _device.Get(),
+        _cmdQueue.Get(),
         _hWnd,
         &swapChainDesc,
         nullptr,

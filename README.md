@@ -6,14 +6,14 @@ Originally a research project, EnDjinn is a 3d renderer built in the style of a 
 ## Development Schedule
 
 ### Current
-Complete a full, simple render pipeline.
-- Scene-based VBO generation and camera constant buffer definition
-- Simple vertex and fragment shading.
+- Complete a full, simple render pipeline.
+  - Scene-based VBO generation and camera constant buffer definition
+  - Simple vertex and fragment shading.
 
 ### Next
-Create model and texture importers
-Implement Vulkan
+- Create model and texture importers
+- Implement Vulkan
 
 ### Future
-VR Support
-Mobile support
+- VR Support
+- Mobile support

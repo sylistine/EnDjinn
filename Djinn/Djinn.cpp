@@ -21,12 +21,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR args,
     try {
         Djn::App app(hInstance);
         app.Run();
-    } catch (Djn::Exception e) {
+    } catch (Djn::Exception& e) {
         Log::Write(std::string("Djinn Exception caught --------------------------------"));
         Log::Write(e.what());
         Log::Write(e.StackTrace());
         Log::Write("-------------------------------------------------------");
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         Log::Write(std::string("Standard Exception caught --------------------------------"));
         Log::Write(e.what());
         Log::Write("-------------------------------------------------------");

@@ -15,9 +15,40 @@ Of course, since we leverage API's like DX12 and Vulkan, and must run upon platf
 
 ## Non-Graphics Engine Features
 
-- "Robust" Logging
-- Custom exception handling w/ stack traces
-- A template-based c#-style event and action system
+"Robust" Logging
+
+Custom exception handling w/ stack traces
+
+```
+EnDjinn v3.3
+
+Enumerating Graphics Hardware Results...
+Adapter: NVIDIA GeForce GTX 1080
+- Output: \\.\DISPLAY1
+Adapter: Microsoft Basic Render Driver
+
+Djinn Exception caught --------------------------------
+
+Sample exception
+
+Stack Trace:
+d:\aaron\dev\src\01solutions\endjinn\djinn\                          debug.h:86    Djn::Exception::GetStackTrace
+d:\aaron\dev\src\01solutions\endjinn\djinn\                          debug.h:48    Djn::Exception::Exception
+d:\aaron\dev\src\01solutions\endjinn\djinn\                          gfx.cpp:108   Djn::Gfx::Gfx
+d:\aaron\dev\src\01solutions\endjinn\djinn\                            gfx.h:30    Djn::Gfx::Instance
+d:\aaron\dev\src\01solutions\endjinn\djinn\                          app.cpp:43    Djn::App::App
+d:\aaron\dev\src\01solutions\endjinn\djinn\                        djinn.cpp:22    WinMain
+d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\     exe_common.inl:107   invoke_main
+d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\     exe_common.inl:288   __scrt_common_main_seh
+d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\     exe_common.inl:331   __scrt_common_main
+d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\    exe_winmain.cpp:17    WinMainCRTStartup
+
+-------------------------------------------------------
+
+Closing Djinn.
+```
+
+A template-based c#-style event and action system
 
 ## Development Schedule
 

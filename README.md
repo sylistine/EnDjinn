@@ -25,3 +25,8 @@ Because this is modeled after game engines, I am welcoming PR's for additions an
 ### Future
 - VR Support
 - Mobile support
+
+### Someday
+
+- Audio
+- Physics

@@ -8,39 +8,59 @@ namespace Djn
         union
         {
             T x;
-            T a;
             T r;
         };
         union
         {
             T y;
-            T b;
             T g;
         };
-        tuple2& operator+(const tuple2& rhs)
+        // ctors.
+        tuple2() : x(0), y(0) {}
+        tuple2(T x, T y) : x(x), y(y) {}
+        // Arithmetic operators.
+        inline const tuple2 operator+(const tuple2& rhs)
+        {
+            return tuple2(x + rhs.x, y + rhs.y);
+        }
+        inline const tuple2 operator-(const tuple2& rhs)
+        {
+            return tuple2(x - rhs.x, y - rhs.y);
+        }
+        inline const tuple2 operator*(const T& rhs)
+        {
+            return tuple2(x * rhs, y * rhs);
+        }
+        inline const tuple2 operator/(const T& rhs)
+        {
+            return tuple2(x / rhs, y / rhs);
+        }
+        // Assignment operators.
+        const tuple2& operator+=(const tuple2& rhs)
         {
             x += rhs.x;
             y += rhs.y;
             return *this;
         }
-        tuple2& operator-(const tuple2& rhs)
+        const tuple2& operator-=(const tuple2& rhs)
         {
             x -= rhs.x;
             y -= rhs.y;
             return *this;
         }
-        tuple2& operator*(T rhs)
+        const tuple2& operator*=(T rhs)
         {
             x *= rhs;
             y *= rhs;
             return *this;
         }
-        tuple2& operator/(T rhs)
+        const tuple2& operator/=(T rhs)
         {
             x /= rhs;
             y /= rhs;
             return *this;
         }
+        // etc.
         bool operator==(const tuple2& rhs)
         {
             return x == rhs.x && y == rhs.y;
@@ -62,49 +82,68 @@ namespace Djn
         union
         {
             T x;
-            T a;
             T r;
         };
         union
         {
             T y;
-            T b;
             T g;
         };
         union
         {
             T z;
-            T c;
             T b;
         };
-        tuple3& operator+(const tuple3& rhs)
+        // ctors
+        tuple3() : x(0), y(0), z(0) {}
+        tuple3(T x, T y, T z) : x(x), y(y), z(z) {}
+        // Arithmetic Operators
+        inline const tuple3 operator+(const tuple3& rhs)
+        {
+            return tuple3(x + rhs.x, y + rhs.y, z + rhs.z);
+        }
+        inline const tuple3 operator-(const tuple3& rhs)
+        {
+            return tuple3(x - rhs.x, y - rhs.y, z - rhs.z);
+        }
+        inline const tuple3 operator*(const T& rhs)
+        {
+            return tuple3(x * rhs, y * rhs, z * rhs);
+        }
+        inline const tuple3 operator/(const T& rhs)
+        {
+            return tuple3(x / rhs, y / rhs, z / rhs);
+        }
+        // Assignment Operators
+        const tuple3& operator+=(const tuple3& rhs)
         {
             x += rhs.x;
             y += rhs.y;
             z += rhs.z;
             return *this;
         }
-        tuple3& operator-(const tuple3& rhs)
+        const tuple3& operator-=(const tuple3& rhs)
         {
             x -= rhs.x;
             y -= rhs.y;
             z -= rhs.z;
             return *this;
         }
-        tuple3& operator*(T rhs)
+        const tuple3& operator*=(const T& rhs)
         {
             x *= rhs;
             y *= rhs;
             z *= rhs;
             return *this;
         }
-        tuple3& operator/(T rhs)
+        const tuple3& operator/=(const T& rhs)
         {
             x /= rhs;
             y /= rhs;
             z /= rhs;
             return *this;
         }
+        // etc.
         bool operator==(const tuple3& rhs)
         {
             return x == rhs.x && y == rhs.y && z == rhs.z;
@@ -126,28 +165,45 @@ namespace Djn
         union
         {
             T x;
-            T a;
             T r;
         };
         union
         {
             T y;
-            T b;
             T g;
         };
         union
         {
             T z;
-            T c;
             T b;
         };
         union
         {
             T w;
-            T d;
             T a;
         };
-        tuple4& operator+(const tuple4& rhs)
+        // ctor
+        tuple4() : x(0), y(0), z(0), w(0) {}
+        tuple4(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {}
+        // Arithmetic operators.
+        inline const tuple4 operator+(const tuple4& rhs)
+        {
+            return tuple4(x + rhs.x, y + rhs.y, z + rhs.z, w + rhs.w);
+        }
+        inline const tuple4 operator-(const tuple4& rhs)
+        {
+            return tuple4(x - rhs.x, y - rhs.y, z - rhs.z, w - rhs.w);
+        }
+        inline const tuple4 operator*(const T& rhs)
+        {
+            return tuple4(x * rhs, y * rhs, z * rhs, w * rhs);
+        }
+        inline const tuple4 operator/(const T& rhs)
+        {
+            return tuple4(x / rhs, y / rhs, z / rhs, w / rhs);
+        }
+        // Assignment operators.
+        const tuple4& operator+=(const tuple4& rhs)
         {
             x += rhs.x;
             y += rhs.y;
@@ -155,7 +211,7 @@ namespace Djn
             w += rhs.w;
             return *this;
         }
-        tuple4& operator-(const tuple4& rhs)
+        const tuple4& operator-=(const tuple4& rhs)
         {
             x -= rhs.x;
             y -= rhs.y;
@@ -163,7 +219,7 @@ namespace Djn
             w -= rhs.w;
             return *this;
         }
-        tuple4& operator*(T rhs)
+        const tuple4& operator*=(const T& rhs)
         {
             x *= rhs;
             y *= rhs;
@@ -171,7 +227,7 @@ namespace Djn
             w *= rhs;
             return *this;
         }
-        tuple4& operator/(T rhs)
+        const tuple4& operator/=(const T& rhs)
         {
             x /= rhs;
             y /= rhs;
@@ -179,6 +235,7 @@ namespace Djn
             w /= rhs;
             return *this;
         }
+        // etc.
         bool operator==(const tuple4& rhs)
         {
             return x == rhs.x && y == rhs.y && z == rhs.z && w == rhs.w;

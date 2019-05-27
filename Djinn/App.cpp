@@ -73,6 +73,7 @@ void App::Run()
     while (!quitting) {
         if (!mainWindow.Update()) {
             timer.Update();
+            Gfx::Instance().Draw();
         }
     }
 }

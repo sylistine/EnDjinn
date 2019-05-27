@@ -12,8 +12,8 @@ namespace Microsoft::VisualStudio::CppUnitTestFramework
     static std::wstring ToString<double2>(const double2& d2)
     {
         return L"(" +
-            std::to_wstring(d2.x) + L", " + std::to_wstring(d2.y) +
-            L")";
+            std::to_wstring(d2.x) + L", " +
+            std::to_wstring(d2.y) + L")";
     }
 }
 

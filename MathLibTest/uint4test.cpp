@@ -9,11 +9,13 @@ using namespace Djn;
 namespace Microsoft::VisualStudio::CppUnitTestFramework
 {
     template<>
-    static std::wstring ToString<uint4>(const uint4& d2)
+    static std::wstring ToString<uint4>(const uint4& u4)
     {
         return L"(" +
-            std::to_wstring(d2.x) + L", " + std::to_wstring(d2.y) +
-            L")";
+            std::to_wstring(u4.x) + L", " +
+            std::to_wstring(u4.y) + L", " +
+            std::to_wstring(u4.z) + L", " +
+            std::to_wstring(u4.w) + L")";
     }
 }
 

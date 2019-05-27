@@ -15,10 +15,9 @@ Of course, since we leverage API's like DX12 and Vulkan, and must run upon platf
 
 ## Non-Graphics Engine Features
 
-"Robust" Logging
-
-Custom exception handling w/ stack traces
-
+- "Robust" Logging
+- Custom exception handling w/ stack traces
+Sample exception logging with stack trace.
 ```
 EnDjinn v3.3
 
@@ -48,7 +47,7 @@ d:\agent\_work\1\s\src\vctools\crt\vcstartup\src\startup\    exe_winmain.cpp:17 
 Closing Djinn.
 ```
 
-A template-based c#-style event and action system
+- A template-based c#-style event and action system
 
 ## Development Schedule
 

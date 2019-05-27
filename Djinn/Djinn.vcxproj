@@ -89,6 +89,7 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -106,6 +107,7 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,6 +127,7 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,6 +149,7 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

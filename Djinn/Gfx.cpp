@@ -207,7 +207,7 @@ void Gfx::Resize(uint2 newSize)
         _renderTextureFormat,
         DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
 
-    _currentBackBuffer = 0;
+    _currentBackBufferIdx = 0;
 
     auto rtvHeapHandle = _rtvDescHeap->GetCPUDescriptorHandleForHeapStart();
     for (auto i = 0; i < SwapChainBufferCount; ++i) {
@@ -291,7 +291,52 @@ void Gfx::Resize(uint2 newSize)
 
 void Gfx::Draw()
 {
+    try {
+        ThrowIfFailed(_cmdAllocator->Reset());
 
+        ThrowIfFailed(_cmdList->Reset(_cmdAllocator.Get(), nullptr));
+
+        auto backBuffer = _swapChainBuffer[_currentBackBufferIdx].Get();
+        auto hBackBufferDesc =_rtvDescHeap->GetCPUDescriptorHandleForHeapStart();
+        hBackBufferDesc.ptr += _currentBackBufferIdx * _rtvDescSize;
+        auto hDepthStencilDesc = _dsvDescHeap->GetCPUDescriptorHandleForHeapStart();
+    
+        D3D12_RESOURCE_BARRIER renderTextureSwapBarrier;
+        renderTextureSwapBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+        renderTextureSwapBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+        renderTextureSwapBarrier.Transition.pResource = backBuffer;
+        renderTextureSwapBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+        renderTextureSwapBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+        renderTextureSwapBarrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+
+        _cmdList->ResourceBarrier(1, &renderTextureSwapBarrier);
+
+        _cmdList->RSSetViewports(1, &_screenViewport);
+        _cmdList->RSSetScissorRects(1, &_scissorRect);
+
+        _cmdList->ClearRenderTargetView(
+            hBackBufferDesc, DirectX::Colors::LightSteelBlue, 0, nullptr);
+        _cmdList->ClearDepthStencilView(
+            hBackBufferDesc,
+            D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+            _cmdList->OMSetRenderTargets(1, &hBackBufferDesc, true, &hDepthStencilDesc);
+
+        renderTextureSwapBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+        renderTextureSwapBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+        _cmdList->ResourceBarrier(1, &renderTextureSwapBarrier);
+
+        _cmdList->Close();
+
+        ID3D12CommandList* cmdLists[] = { _cmdList.Get() };
+        _cmdQueue->ExecuteCommandLists(1, cmdLists);
+
+        ThrowIfFailed(_swapChain->Present(0, 0));
+        _currentBackBufferIdx = (_currentBackBufferIdx + 1) % SwapChainBufferCount;
+
+        FlushCommandQueue();
+    } catch (...) {
+        throw Exception(GetDebugLayerMessages());
+    }
 }
 
 
@@ -315,7 +360,14 @@ void Gfx::ThrowIfFailed(HRESULT result)
 {
     if (!FAILED(result)) return;
 
-    string errorMessage;
+    _com_error error(result);
+    _bstr_t bstr(error.ErrorMessage());
+    throw Exception(GetDebugLayerMessages() + string(bstr));
+}
+
+string Gfx::GetDebugLayerMessages()
+{
+    string errorMessage = "";
 #ifdef _DEBUG
     if (_device.Get() != nullptr) {
         ComPtr<ID3D12InfoQueue> infoQueue;
@@ -325,7 +377,7 @@ void Gfx::ThrowIfFailed(HRESULT result)
             auto numStoredMessages = infoQueue->GetNumStoredMessages();
             errorMessage += "D3D12 Debug Layer Messages: " + to_string(numStoredMessages);
             for (auto i = 0; i < numStoredMessages; ++i) {
-                errorMessage += "\nInfo queue message: ";
+                errorMessage += "\n - ";
                 size_t msgSize;
                 if (FAILED(infoQueue->GetMessage(i, NULL, &msgSize))) {
                     errorMessage += "Unable to get message size from info queue.";
@@ -339,12 +391,8 @@ void Gfx::ThrowIfFailed(HRESULT result)
                 errorMessage += string(msg->pDescription);
                 free(msg);
             }
-            errorMessage += "\n\n";
         }
     }
 #endif
-
-    _com_error error(result);
-    _bstr_t bstr(error.ErrorMessage());
-    throw Exception(errorMessage + string(bstr));
+    return errorMessage;
 }

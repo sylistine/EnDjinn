@@ -7,7 +7,7 @@
 #include <dxgi1_4.h>
 #include <d3d12.h>
 //#include <DirectXMath.h>
-//#include <DirectXColors.h>
+#include <DirectXColors.h>
 
 #include "Djinn.h"
 
@@ -39,7 +39,7 @@ namespace Djn
         DXGI_FORMAT _depthStencilFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
         DXGI_SAMPLE_DESC _defaultSampleDesc;
         static const UINT SwapChainBufferCount = 2;
-        UINT _currentBackBuffer = 0;
+        UINT _currentBackBufferIdx = 0;
         UINT64 _currentFence = 0;
         HWND _hWnd;
         uint2 _renderSize;
@@ -71,5 +71,6 @@ namespace Djn
     private:
         void FlushCommandQueue();
         void ThrowIfFailed(HRESULT result);
+        std::string GetDebugLayerMessages();
     };
 }

@@ -49,6 +49,7 @@ namespace Djn
             }
             catch (std::exception e) {
                 Log::Write(std::string("Failed to retrieve stack trace: ") + e.what());
+                Log::Write("Converting Djn::Exception to std::exception.");
                 throw std::exception(what);
             }
         }

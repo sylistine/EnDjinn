@@ -317,9 +317,9 @@ void Gfx::Draw()
         _cmdList->ClearRenderTargetView(
             hBackBufferDesc, DirectX::Colors::LightSteelBlue, 0, nullptr);
         _cmdList->ClearDepthStencilView(
-            hBackBufferDesc,
+            hDepthStencilDesc,
             D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
-            _cmdList->OMSetRenderTargets(1, &hBackBufferDesc, true, &hDepthStencilDesc);
+        _cmdList->OMSetRenderTargets(1, &hBackBufferDesc, true, &hDepthStencilDesc);
 
         renderTextureSwapBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
         renderTextureSwapBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;

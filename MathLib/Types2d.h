@@ -65,12 +65,12 @@ namespace Djn
 
     // etc.
     TEMPLATE_T
-        inline bool operator==(const tuple2<T>& lhs, const tuple2<T>& rhs)
+    inline bool operator==(const tuple2<T>& lhs, const tuple2<T>& rhs)
     {
         return lhs.x == rhs.x && lhs.y == rhs.y;
     }
     TEMPLATE_T
-        inline bool operator!=(const tuple2<T>& lhs, const tuple2<T>& rhs)
+    inline bool operator!=(const tuple2<T>& lhs, const tuple2<T>& rhs)
     {
         return !(lhs == rhs);
     }

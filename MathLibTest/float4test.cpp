@@ -3,7 +3,6 @@
 
 #include "../MathLib/Math.h"
 
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Djn;
 
@@ -20,7 +19,6 @@ namespace Microsoft::VisualStudio::CppUnitTestFramework
 
 namespace Djn::MathLibTest
 {
-
     TEST_CLASS(float4test)
     {
     public:

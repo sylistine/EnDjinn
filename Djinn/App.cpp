@@ -40,7 +40,9 @@ App::App(HINSTANCE hInstance) :
     mainWindow.OnRestored += &resizeWindowAction;
 
     auto windowSize = mainWindow.GetWindowSize();
-    Gfx::Instance().Init(mainWindow.GetWindowHandler(), windowSize.x, windowSize.y);
+    Gfx::Instance().Init(
+        mainWindow.GetWindowHandler(),
+        uint2(windowSize.x, windowSize.y));
 }
 
 
@@ -78,7 +80,9 @@ void App::Run()
 
 void App::ResizeWindow()
 {
-    // TODO: graphics update.
+    auto& newWindowSize = mainWindow.GetWindowSize();
+    uint2 uNewWindowSize(newWindowSize.x, newWindowSize.y);
+    Gfx::Instance().Resize(uNewWindowSize);
 }
 
 

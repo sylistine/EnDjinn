@@ -31,7 +31,8 @@ namespace Djn
             return instance;
         }
     public:
-        void Init(HWND hWnd, UINT width, UINT height);
+        void Init(HWND hWnd, uint2 windowSize);
+        void Resize(uint2 newSize);
     private:
         Gfx();
         ~Gfx();
@@ -39,7 +40,8 @@ namespace Djn
         D3D12_COMMAND_LIST_TYPE _cmdListType = D3D12_COMMAND_LIST_TYPE_DIRECT;
         DXGI_FORMAT _renderFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
         DXGI_SAMPLE_DESC _defaultSampleDesc;
-        UINT _swapChainBufferCount = 2;
+        static const UINT SwapChainBufferCount = 2;
+        UINT _currentBackBuffer = 0;
         HWND _hWnd;
         uint2 _renderSize;
         // Base objects.
@@ -49,9 +51,11 @@ namespace Djn
         Microsoft::WRL::ComPtr<ID3D12CommandQueue> _cmdQueue;
         Microsoft::WRL::ComPtr<ID3D12CommandAllocator> _cmdAllocator;
         Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> _cmdList;
-        // Graphics prospects.
+        // Graphics resources.
         Microsoft::WRL::ComPtr<ID3D12Fence> _fence;
         Microsoft::WRL::ComPtr<IDXGISwapChain1> _swapChain;
+        Microsoft::WRL::ComPtr<ID3D12Resource> _swapChainBuffer[SwapChainBufferCount];
+        Microsoft::WRL::ComPtr<ID3D12Resource> _depthStencilBuffer;
         std::vector<AdapterInfo> _adapterInfo;
         DXGI_MODE_DESC _preferredOutputMode;
         void ThrowIfFailed(HRESULT result);

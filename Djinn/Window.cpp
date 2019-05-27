@@ -121,6 +121,7 @@ LRESULT MainWindow::WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
         }
         return 0;
     case WM_SIZE:
+        _windowSize = int2(LOWORD(lParam), HIWORD(lParam));
         if (wParam == SIZE_MINIMIZED) {
             windowState = Minimized;
             OnMinimize();

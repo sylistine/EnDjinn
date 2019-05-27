@@ -12,7 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR args,
     // Pretty much just asserting there is no logger exception.
     try {
         Log::WriteRaw("EnDjinn v3.3\n");
-    } catch (std::exception& e) {
+    } catch (std::exception e) {
         std::cout << e.what() << std::endl;
         return -1;
     }
@@ -21,12 +21,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR args,
     try {
         Djn::App app(hInstance);
         app.Run();
-    } catch (Djn::Exception& e) {
+    } catch (Djn::Exception e) {
         Log::Write(std::string("Djinn Exception caught --------------------------------"));
         Log::Write(e.what());
         Log::Write(e.StackTrace());
         Log::Write("-------------------------------------------------------");
-    } catch (std::exception& e) {
+    } catch (std::exception e) {
         Log::Write(std::string("Standard Exception caught --------------------------------"));
         Log::Write(e.what());
         Log::Write("-------------------------------------------------------");

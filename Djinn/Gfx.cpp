@@ -126,10 +126,10 @@ Gfx::Gfx()
 Gfx::~Gfx() {}
 
 
-void Gfx::Init(HWND hWnd, UINT width, UINT height)
+void Gfx::Init(HWND hWnd, uint2 windowSize)
 {
     _hWnd = hWnd;
-    _renderSize = { width, height };
+    _renderSize = windowSize;
 
     ThrowIfFailed(_device->CreateFence(
         0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence)));
@@ -143,7 +143,7 @@ void Gfx::Init(HWND hWnd, UINT width, UINT height)
     swapChainDesc.Stereo = false;
     swapChainDesc.SampleDesc = _defaultSampleDesc;
     swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    swapChainDesc.BufferCount = _swapChainBufferCount;
+    swapChainDesc.BufferCount = SwapChainBufferCount;
     swapChainDesc.Scaling = DXGI_SCALING_NONE;
     swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
     swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
@@ -162,6 +162,33 @@ void Gfx::Init(HWND hWnd, UINT width, UINT height)
         _swapChain.GetAddressOf()));
 
     // TODO: descriptor heaps, et. al.
+
+    Resize(_renderSize);
+}
+
+void Gfx::Resize(uint2 newSize)
+{
+    // TODO: Flush command queue.
+
+    _renderSize = newSize;
+
+    ThrowIfFailed(_cmdList->Reset(_cmdAllocator.Get(), nullptr));
+
+    for (int i = 0; i < SwapChainBufferCount; ++i) {
+        _swapChainBuffer[i].Reset();
+    }
+    _depthStencilBuffer.Reset();
+
+    _swapChain->ResizeBuffers(
+        SwapChainBufferCount,
+        _renderSize.x, _renderSize.y,
+        _renderFormat,
+        DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
+
+    _currentBackBuffer = 0;
+
+   
+    ThrowIfFailed(_cmdList->Close());
 }
 
 
@@ -200,6 +227,5 @@ void Gfx::ThrowIfFailed(HRESULT result)
 
     _com_error error(result);
     _bstr_t bstr(error.ErrorMessage());
-    auto str = errorMessage + string(bstr);
-    throw Exception(str.c_str());
+    throw Exception(errorMessage + string(bstr));
 }

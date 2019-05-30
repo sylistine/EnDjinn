@@ -362,7 +362,8 @@ void Gfx::ThrowIfFailed(HRESULT result)
 
     _com_error error(result);
     _bstr_t bstr(error.ErrorMessage());
-    throw Exception(GetDebugLayerMessages() + string(bstr));
+    string debugLayerMessages = GetDebugLayerMessages();
+    throw Exception(debugLayerMessages + string(bstr));
 }
 
 string Gfx::GetDebugLayerMessages()

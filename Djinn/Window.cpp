@@ -138,6 +138,8 @@ LRESULT MainWindow::WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
                 windowState = Windowed;
                 OnRestored();
                 break;
+            case Resizing:
+                break;
             default:
                 OnRestored();
                 break;
